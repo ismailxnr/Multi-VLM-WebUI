@@ -52,7 +52,7 @@ services:
       - /home:/home
       - /mnt:/mnt
       - /media:/media
-      - ${RSLLAVA_DIR}:/app/RS-LLaVA
+      - ${RSLLAVA_DIR:-./docker/rsllava}:/app/RS-LLaVA
       - ~/.cache/huggingface:/root/.cache/huggingface
     deploy:
       resources:
