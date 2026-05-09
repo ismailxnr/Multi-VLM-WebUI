@@ -9,7 +9,9 @@ services:
       - "${WEB_PORT:-8000}:8000"
     volumes:
       - ./web_app:/workspace/web_app
-      - ${MODELS_DIR}:/models
+      - /home:/home
+      - /mnt:/mnt
+      - /media:/media
     environment:
       - QWEN_ENDPOINT=http://qwen_vlm:8001
       - RSLLAVA_ENDPOINT=http://rsllava_vlm:8002
@@ -27,7 +29,9 @@ services:
       - "8001:8001"
     volumes:
       - ./docker/qwen:/app
-      - ${MODELS_DIR}:/models
+      - /home:/home
+      - /mnt:/mnt
+      - /media:/media
       - ~/.cache/huggingface:/root/.cache/huggingface
     deploy:
       resources:
@@ -45,7 +49,9 @@ services:
       - "8002:8002"
     volumes:
       - ./docker/rsllava:/app
-      - ${MODELS_DIR}:/models
+      - /home:/home
+      - /mnt:/mnt
+      - /media:/media
       - ${RSLLAVA_DIR}:/app/RS-LLaVA
       - ~/.cache/huggingface:/root/.cache/huggingface
     deploy:
@@ -64,7 +70,9 @@ services:
       - "8003:8003"
     volumes:
       - ./docker/generic:/app
-      - ${MODELS_DIR}:/models
+      - /home:/home
+      - /mnt:/mnt
+      - /media:/media
       - ~/.cache/huggingface:/root/.cache/huggingface
     deploy:
       resources:

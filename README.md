@@ -24,7 +24,6 @@ This project isolates different model families (e.g., Qwen, LLaVA, Generic Huggi
    cp .env.example .env
    ```
 3. Edit the `.env` file to point to your local directories:
-   - `MODELS_DIR`: The directory on your host machine where your model checkpoints are stored. This will be mounted to `/models` inside the containers.
    - `RSLLAVA_DIR`: The path to your local clone of the `LLaVA` or `RS-LLaVA` repository. This is mounted to `/app/RS-LLaVA` in the `rsllava_vlm` container.
    - `WEB_PORT`: The port on which the web interface will be exposed (default `8000`).
 
@@ -40,8 +39,8 @@ Access the web interface at `http://localhost:8000` (or whatever port you specif
 
 ## Managing Models
 
-Models are managed via the web interface. When adding a new custom model through the UI, ensure the `path` you provide is relative to the mount point. 
-For example, if your host model is at `/home/user/models/checkpoint-8000` and you set `MODELS_DIR=/home/user/models`, the path you input in the UI should be `/models/checkpoint-8000`.
+Models are managed via the web interface. You can input the absolute path to any model located under `/home`, `/mnt`, or `/media` on your host machine.
+Because these host root directories are mapped directly into the containers, you don't need to change the path. For example, if your model is at `/home/user/models/checkpoint-8000`, simply enter exactly `/home/user/models/checkpoint-8000` into the UI.
 
 ## Memory Management
 

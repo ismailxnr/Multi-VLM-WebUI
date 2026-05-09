@@ -8,14 +8,14 @@
     },
     "custom/rsllava": {
         "name": "rsllava",
-        "path": "/models/rsllava-tr-lora-second-train_backup/checkpoint-8000",
+        "path": "/home/ismail/project_vlm/output/rsllava-tr-lora-second-train_backup/checkpoint-8000",
         "family": "rsllava",
         "group": "Custom Models",
         "step": 999999
     },
     "custom/ds": {
         "name": "ds",
-        "path": "/models/rsllava-tr-lora-second-train_backup/checkpoint-8000",
+        "path": "/home/ismail/project_vlm/output/rsllava-tr-lora-second-train_backup/checkpoint-8000",
         "family": "qwenvl",
         "group": "Custom Models",
         "step": 999999
