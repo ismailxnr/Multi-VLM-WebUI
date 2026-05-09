@@ -3,8 +3,8 @@ version: '3.8'
 services:
   webapp:
     build:
-      context: .
-      dockerfile: docker/webapp/Dockerfile
+      context: ./docker/webapp
+      dockerfile: Dockerfile
     ports:
       - "${WEB_PORT:-8000}:8000"
     volumes:
@@ -23,8 +23,8 @@ services:
 
   qwen_vlm:
     build:
-      context: .
-      dockerfile: docker/qwen/Dockerfile
+      context: ./docker/qwen
+      dockerfile: Dockerfile
     ports:
       - "8001:8001"
     volumes:
@@ -43,8 +43,8 @@ services:
 
   rsllava_vlm:
     build:
-      context: .
-      dockerfile: docker/rsllava/Dockerfile
+      context: ./docker/rsllava
+      dockerfile: Dockerfile
     ports:
       - "8002:8002"
     volumes:
@@ -64,8 +64,8 @@ services:
 
   generic_vlm:
     build:
-      context: .
-      dockerfile: docker/generic/Dockerfile
+      context: ./docker/generic
+      dockerfile: Dockerfile
     ports:
       - "8003:8003"
     volumes:
