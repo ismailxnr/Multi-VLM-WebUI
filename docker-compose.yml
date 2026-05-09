@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: docker/webapp/Dockerfile
+    ports:
+      - "${WEB_PORT:-8000}:8000"
+    volumes:
+      - ./web_app:/workspace/web_app
+      - ${MODELS_DIR}:/models
+    environment:
+      - QWEN_ENDPOINT=http://qwen_vlm:8001
+      - RSLLAVA_ENDPOINT=http://rsllava_vlm:8002
+      - GENERIC_ENDPOINT=http://generic_vlm:8003
+    depends_on:
+      - qwen_vlm
+      - rsllava_vlm
+      - generic_vlm
+
+  qwen_vlm:
+    build:
+      context: .
+      dockerfile: docker/qwen/Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./docker/qwen:/app
+      - ${MODELS_DIR}:/models
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  rsllava_vlm:
+    build:
+      context: .
+      dockerfile: docker/rsllava/Dockerfile
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./docker/rsllava:/app
+      - ${MODELS_DIR}:/models
+      - ${RSLLAVA_DIR}:/app/RS-LLaVA
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  generic_vlm:
+    build:
+      context: .
+      dockerfile: docker/generic/Dockerfile
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./docker/generic:/app
+      - ${MODELS_DIR}:/models
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
